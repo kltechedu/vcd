@@ -14,6 +14,25 @@ for el in root.getElementsByTagName("VMRecord"):
     if el.attributes.items()[0][1] != "guacamole":
         vms_dict[el.attributes.items()[0][1]] = el.attributes.items()[2][1]
 
+
+if "router" in vms_dict.keys():
+    print("Starting router")
+    task_id = start_vm(t, vms_dict["router"])
+    if not task_id:
+        print("Failed to start router")
+    else:
+        status = get_task(t, task_id)
+        while status == "queued" or status == "running":
+            status = get_task(t, task_id)
+            if status == "success":
+                print("router started")
+            elif status == "error":
+                print("router failed to start")
+            time.sleep(1)
+            print(".", end="", flush=True)
+    del vms_dict["router"]
+
+
 if "dc" in vms_dict.keys():
     print("Starting dc")
     task_id = start_vm(t, vms_dict["dc"])
@@ -45,7 +64,7 @@ for k in vms_dict.keys():
         if status == "success":
             print(f"{k} started")
         elif status == "error":
-            print("{k} failed to start")
+            print(f"{k} failed to start")
         time.sleep(1)
         print(".", end="", flush=True)
 

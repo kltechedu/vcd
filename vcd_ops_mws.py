@@ -44,7 +44,7 @@ def _get_org(headers_dict):
 def vmware_token(auth):
     url = "https://iaas-gb.cloud.mts.ru/cloudapi/1.0.0/sessions"
     headers_init = {
-        'User-Agent': 'Python 3.11',
+        'User-Agent': 'Python 3.12',
         'Accept': 'application/*;version=38.1',
         'Authorization': 'Basic {auth}'.format(auth=auth),
         'Content-Type': 'application/x-www-form-urlencoded'

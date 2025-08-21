@@ -7,7 +7,7 @@ delay = 60
 t, o = vmware_token(secret)
 vms = list_vms(t)
 
-print("Stopping all virtual machimes")
+print("Stopping all virtual machines")
 document = parseString(vms)
 root = document.documentElement
 for el in root.getElementsByTagName("VMRecord"):
