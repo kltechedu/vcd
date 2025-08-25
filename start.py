@@ -16,20 +16,20 @@ for el in root.getElementsByTagName("VMRecord"):
 
 
 if "router" in vms_dict.keys():
-    print("Starting router")
-    task_id = start_vm(t, vms_dict["router"])
-    if not task_id:
-        print("Failed to start router")
-    else:
-        status = get_task(t, task_id)
-        while status == "queued" or status == "running":
-            status = get_task(t, task_id)
-            if status == "success":
-                print("router started")
-            elif status == "error":
-                print("router failed to start")
-            time.sleep(1)
-            print(".", end="", flush=True)
+#    print("Starting router")
+#    task_id = start_vm(t, vms_dict["router"])
+#    if not task_id:
+#        print("Failed to start router")
+#    else:
+#        status = get_task(t, task_id)
+#        while status == "queued" or status == "running":
+#            status = get_task(t, task_id)
+#            if status == "success":
+#                print("router started")
+#            elif status == "error":
+#                print("router failed to start")
+#            time.sleep(1)
+#            print(".", end="", flush=True)
     del vms_dict["router"]
 
 

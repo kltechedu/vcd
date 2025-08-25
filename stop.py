@@ -12,10 +12,10 @@ document = parseString(vms)
 root = document.documentElement
 for el in root.getElementsByTagName("VMRecord"):
     vm_name = el.attributes.items()[0][1] 
-    if vm_name != "guacamole":
+    if vm_name != "guacamole" or vm_name != "router":
         task_id = shutdown_vm(t,el.attributes.items()[2][1])
         if not task_id:
-            print(f"Failed to stop {vm_name}")
+            print(f"Failed to shutdown {vm_name}")
             continue
             
         status = get_task(t, task_id)
