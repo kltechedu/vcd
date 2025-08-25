@@ -33,7 +33,7 @@ for el in root.getElementsByTagName("VMRecord"):
                     elif status == "error":
                         print("{vm_name} failed to stop")
                     time.sleep(1)
-                    print(".", end="")
+                    print(".", end="", flush=True)
             time.sleep(1)
             print(".", end="", flush=True)
 

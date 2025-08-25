@@ -53,6 +53,27 @@ if "dc" in vms_dict.keys():
         time.sleep(delay)
     del vms_dict["dc"]
 
+if "NGFW_kvm" in vms_dict.keys():
+    print("Starting NGFW_kvm")
+    ngfw_delay = delay/2
+    task_id = start_vm(t, vms_dict["NGFW_kvm"])
+    if not task_id:
+        print("Failed to start NGFW_kvm")
+    else:
+        status = get_task(t, task_id)
+        while status == "queued" or status == "running":
+            status = get_task(t, task_id)
+            if status == "success":
+                print("NGFW_kvm started")
+            elif status == "error":
+                print("NGFW_kvm failed to start")
+            time.sleep(1)
+            print(".", end="", flush=True)
+        print("")
+        print(f"Waiting {ngfw_delay} sec to start other virtual machines")
+        time.sleep(ngfw_delay)
+    del vms_dict["NGFW_kvm"]
+
 for k in vms_dict.keys():
     task_id = start_vm(t, vms_dict[k])
     if not task_id:
